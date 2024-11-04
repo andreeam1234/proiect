@@ -1,136 +1,264 @@
 #include <iostream>
-#include <array>
-#include <chrono>
-#include <thread>
+#include <string>
+#include<vector>
+#include <fstream>
+using namespace std;
 
-#include <SFML/Graphics.hpp>
+class Bilet {
+private:
+    string tip;
+    double pret;
+    bool priority;
 
-#include <Helper.h>
-
-//////////////////////////////////////////////////////////////////////
-/// NOTE: this include is needed for environment-specific fixes     //
-/// You can remove this include and the call from main              //
-/// if you have tested on all environments, and it works without it //
-#include "env_fixes.h"                                              //
-//////////////////////////////////////////////////////////////////////
-
-
-//////////////////////////////////////////////////////////////////////
-/// This class is used to test that the memory leak checks work as expected even when using a GUI
-class SomeClass {
 public:
-    explicit SomeClass(int) {}
+    Bilet(const string& tip = "", double pret = 0.0, bool priority = false)
+        : tip(tip), pret(pret), priority(priority) {}
+
+    Bilet(const Bilet& other) : tip(other.tip), pret(other.pret), priority(other.priority) {}
+
+    Bilet& operator=(const Bilet& other) {
+        if(this != &other) {
+            tip = other.tip;
+            pret = other.pret;
+            priority = other.priority;
+        }
+        return *this;
+    };
+
+    ~Bilet() {};
+
+    friend ostream& operator<<(ostream& os, const Bilet& bilet) {
+        os << "Tip bilet: " << bilet.tip
+        << " Pret: " << bilet.pret
+        << " Prioritate bilet: " << (bilet.priority ? "da" : "nu");
+        return os;
+    }
+
+    double getPret() const {return pret;}
+    bool hasPriority() const {return priority;}
 };
 
-SomeClass *getC() {
-    return new SomeClass{2};
-}
-//////////////////////////////////////////////////////////////////////
+class atractie {
+private:
+    string nume;
+    int inaltime_minima;
+    double durata;
+    string tip;
 
+public:
+    atractie(const string& nume = "", int inaltime_minima = 0, double durata = 0.0, const string tip = "")
+        : nume(nume), inaltime_minima(inaltime_minima), durata(durata), tip(tip) {}
+
+    atractie(const atractie& other) : nume(other.nume), inaltime_minima(other.inaltime_minima), durata(other.durata), tip(other.tip) {}
+
+    atractie& operator=(const atractie& other) {
+        if(this != &other) {
+            nume=other.nume;
+            inaltime_minima = other.inaltime_minima;
+            durata = other.durata;
+            tip = other.tip;
+        }
+        return *this;
+    }
+
+    ~atractie() {};
+
+    friend ostream& operator<<(ostream& os, const atractie& atractie) {
+        os << "Atractie: " << atractie.nume
+        << " Inaltime minima: " << atractie.inaltime_minima
+        << " Durata: " << atractie.durata
+        << " Tip: " << atractie.tip;
+        return os;
+    }
+
+    int getInaltimeMinima() const {return inaltime_minima;}
+    double getDurata() const {return durata;}
+    string getTip() const {return tip;}
+};
+
+class vizitator {
+private:
+    string nume;
+    int varsta;
+    Bilet bilet;
+    int timp_petrecut;
+    vector<atractie> atractii_vizitate;
+
+public:
+    vizitator(const string& nume = "", int varsta = 0, const Bilet& bilet = Bilet(), int timp_petrecut = 0)
+        : nume(nume), varsta(varsta), bilet(bilet), timp_petrecut(timp_petrecut) {}
+
+    vizitator(const vizitator& other)
+        : nume(other.nume), varsta(other.varsta), bilet(other.bilet), timp_petrecut(other.timp_petrecut), atractii_vizitate(other.atractii_vizitate) {}
+
+    vizitator& operator=(const vizitator& other) {
+        if(this != &other) {
+            nume = other.nume;
+            varsta = other.varsta;
+            bilet = other.bilet;
+            timp_petrecut = other.timp_petrecut;
+            atractii_vizitate = other.atractii_vizitate;
+        }
+        return *this;
+    }
+    ~vizitator() {};
+
+    void add_atractii_vizitate(const atractie& atractie) {
+        atractii_vizitate.push_back(atractie);
+    }
+
+    friend ostream& operator<<(ostream& os, const vizitator& vizit) {
+        os << "Vizitator: " << vizit.nume
+        << " varsta: " << vizit.varsta
+        << " bilet: " << vizit.bilet
+        << " timp_petrecut: " << vizit.timp_petrecut
+        << " atractii_vizitate: ";
+        for(const auto& atractie : vizit.atractii_vizitate) {
+            os << "\n  -" << atractie;
+        }
+        return os;
+    }
+
+    int getVarsta() const {return varsta;}
+    double getTimpPetrecut() const {return timp_petrecut;}
+    Bilet getBilet() const {return bilet;}
+    const vector<atractie>& get_atractie() const {return atractii_vizitate;}
+};
+
+class parc_distractie {
+private:
+    vector<vizitator> vizitatori;
+    vector<atractie> atractii;
+public:
+    parc_distractie() {}
+
+    parc_distractie(const parc_distractie& other) : vizitatori(other.vizitatori), atractii(other.atractii) {}
+
+    parc_distractie& operator=(const parc_distractie& other) {
+        if(this != &other) {
+            vizitatori = other.vizitatori;
+            atractii = other.atractii;
+        }
+        return *this;
+    }
+    ~parc_distractie() {}
+
+    void add_atractie(const atractie& atractie) {
+        atractii.push_back(atractie);
+    }
+    void add_vizitator(const vizitator& vizit) {
+        vizitatori.push_back(vizit);
+    }
+    void afis() const {
+        cout << "Vizitatori: ";
+        for(const auto& vizitator : vizitatori) {
+            cout << vizitator << endl;
+        }
+
+        cout << "atractii: ";
+        for(const auto& atractie : atractii) {
+            cout << atractie << endl;
+        }
+    }
+
+    double calcul_profit() const {
+        double total = 0.0;
+        for(const auto& vizitator : vizitatori) {
+            total += vizitator.getBilet().getPret();
+        }
+        return total;
+    }
+
+    double calcul_timp_medium() const {
+        if(vizitatori.empty()) return 0.0;
+            double total = 0.0;
+            for(const auto& vizitator : vizitatori) {
+                total += vizitator.getTimpPetrecut();
+            }
+            return total/vizitatori.size();
+    }
+
+    void citire() {
+        int nrVizitatori, nrAtractii, nrAtractiiVizitate;
+
+        cout << "numar de vizitatori: ";
+        cin >> nrVizitatori;
+        for (int i = 0; i < nrVizitatori; i++) {
+            string numeVizitator, tipBilet, numeAtractie, tipAtractie;
+            int varsta, timpPetrecut, inaltimeMinima;
+            double pretBilet, durata;
+            bool accesPrioritar;
+
+            cout << "\n datele despre vizitator " << (i + 1) << ":\n";
+            cout << "Nume: ";
+            cin >> numeVizitator;
+            cout << "Varsta: ";
+            cin >> varsta;
+            cout << "Tip Bilet: ";
+            cin >> tipBilet;
+            cout << "Pret Bilet: ";
+            cin >> pretBilet;
+            cout << "Acces Prioritar (1 - Da, 0 - Nu): ";
+            cin >> accesPrioritar;
+            cout << "Timp Petrecut (ore): ";
+            cin >> timpPetrecut;
+
+            Bilet bilet(tipBilet, pretBilet, accesPrioritar);
+            vizitator vizitator(numeVizitator, varsta, bilet, timpPetrecut);
+
+            cout << "Numarul de atractii vizitate de " << numeVizitator<< " ";
+            cin >> nrAtractiiVizitate;
+            for(int i = 0; i < nrAtractiiVizitate; i++) {
+                string numeAtractie;
+                cout << "Nume Atractie: ";
+                cin >> numeAtractie;
+            }
+
+            atractie atractieVizitata(numeAtractie, inaltimeMinima, durata, tipAtractie);
+            vizitator.add_atractii_vizitate(atractieVizitata);
+
+            add_vizitator(vizitator);
+        }
+
+        cout << "\n numarul de atractii: ";
+        cin >> nrAtractii;
+        for (int i = 0; i < nrAtractii; i++) {
+            string nume, tip;
+            int inaltimeMinima;
+            double durata;
+
+            cout << "\nIntroduceti datele pentru atractia " << (i + 1) << ":\n";
+            cout << "Nume: ";
+            cin >> nume;
+            cout << "Inaltime Minima (cm): ";
+            cin >> inaltimeMinima;
+            cout << "Durata (minute): ";
+            cin >> durata;
+            cout << "Tip: ";
+            cin >> tip;
+
+            atractie atractie(nume, inaltimeMinima, durata, tip);
+            add_atractie(atractie);
+        }
+    }
+};
 
 int main() {
-    ////////////////////////////////////////////////////////////////////////
-    /// NOTE: this function call is needed for environment-specific fixes //
-    init_threads();                                                       //
-    ////////////////////////////////////////////////////////////////////////
-    ///
-    std::cout << "Hello, world!\n";
-    std::array<int, 100> v{};
-    int nr;
-    std::cout << "Introduceți nr: ";
-    /////////////////////////////////////////////////////////////////////////
-    /// Observație: dacă aveți nevoie să citiți date de intrare de la tastatură,
-    /// dați exemple de date de intrare folosind fișierul tastatura.txt
-    /// Trebuie să aveți în fișierul tastatura.txt suficiente date de intrare
-    /// (în formatul impus de voi) astfel încât execuția programului să se încheie.
-    /// De asemenea, trebuie să adăugați în acest fișier date de intrare
-    /// pentru cât mai multe ramuri de execuție.
-    /// Dorim să facem acest lucru pentru a automatiza testarea codului, fără să
-    /// mai pierdem timp de fiecare dată să introducem de la zero aceleași date de intrare.
-    ///
-    /// Pe GitHub Actions (bife), fișierul tastatura.txt este folosit
-    /// pentru a simula date introduse de la tastatură.
-    /// Bifele verifică dacă programul are erori de compilare, erori de memorie și memory leaks.
-    ///
-    /// Dacă nu puneți în tastatura.txt suficiente date de intrare, îmi rezerv dreptul să vă
-    /// testez codul cu ce date de intrare am chef și să nu pun notă dacă găsesc vreun bug.
-    /// Impun această cerință ca să învățați să faceți un demo și să arătați părțile din
-    /// program care merg (și să le evitați pe cele care nu merg).
-    ///
-    /////////////////////////////////////////////////////////////////////////
-    std::cin >> nr;
-    /////////////////////////////////////////////////////////////////////////
-    for(int i = 0; i < nr; ++i) {
-        std::cout << "v[" << i << "] = ";
-        std::cin >> v[i];
-    }
-    std::cout << "\n\n";
-    std::cout << "Am citit de la tastatură " << nr << " elemente:\n";
-    for(int i = 0; i < nr; ++i) {
-        std::cout << "- " << v[i] << "\n";
-    }
-    ///////////////////////////////////////////////////////////////////////////
-    /// Pentru date citite din fișier, NU folosiți tastatura.txt. Creați-vă voi
-    /// alt fișier propriu cu ce alt nume doriți.
-    /// Exemplu:
-    /// std::ifstream fis("date.txt");
-    /// for(int i = 0; i < nr2; ++i)
-    ///     fis >> v2[i];
-    ///
-    ///////////////////////////////////////////////////////////////////////////
-    ///                Exemplu de utilizare cod generat                     ///
-    ///////////////////////////////////////////////////////////////////////////
-    Helper helper;
-    helper.help();
-    ///////////////////////////////////////////////////////////////////////////
-
-    SomeClass *c = getC();
-    std::cout << c << "\n";
-    delete c;
-
-    sf::RenderWindow window;
-    ///////////////////////////////////////////////////////////////////////////
-    /// NOTE: sync with env variable APP_WINDOW from .github/workflows/cmake.yml:31
-    window.create(sf::VideoMode({800, 700}), "My Window", sf::Style::Default);
-    ///////////////////////////////////////////////////////////////////////////
-    //
-    ///////////////////////////////////////////////////////////////////////////
-    /// NOTE: mandatory use one of vsync or FPS limit (not both)            ///
-    /// This is needed so we do not burn the GPU                            ///
-    window.setVerticalSyncEnabled(true);                                    ///
-    /// window.setFramerateLimit(60);                                       ///
-    ///////////////////////////////////////////////////////////////////////////
-
-    while(window.isOpen()) {
-        bool shouldExit = false;
-        sf::Event e{};
-        while(window.pollEvent(e)) {
-            switch(e.type) {
-            case sf::Event::Closed:
-                window.close();
-                break;
-            case sf::Event::Resized:
-                std::cout << "New width: " << window.getSize().x << '\n'
-                          << "New height: " << window.getSize().y << '\n';
-                break;
-            case sf::Event::KeyPressed:
-                std::cout << "Received key " << (e.key.code == sf::Keyboard::X ? "X" : "(other)") << "\n";
-                if(e.key.code == sf::Keyboard::Escape)
-                    shouldExit = true;
-                break;
-            default:
-                break;
-            }
-        }
-        if(shouldExit) {
-            window.close();
-            break;
-        }
-        using namespace std::chrono_literals;
-        std::this_thread::sleep_for(300ms);
-
-        window.clear();
-        window.display();
-    }
+    parc_distractie Parc ;
+    Parc.citire();
+    Parc.afis();
     return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
