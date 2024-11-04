@@ -199,8 +199,8 @@ public:
         cin >> nrAtractii;
         for (int i = 0; i < nrAtractii; i++) {
             string nume, tip;
-            int inaltimeMinima;
-            double durata;
+            int inaltimeMinima; // Only declare if you use it later
+            double durata; // Only declare if you use it later
 
             cout << "\nIntroduceti datele pentru atractia " << (i + 1) << ":\n";
             cout << "Nume: ";
@@ -216,6 +216,7 @@ public:
             add_atractie(atractie);
         }
     }
+
 
     void afis() const {
         cout << "Vizitatori:\n";
