@@ -27,6 +27,7 @@ public:
 
     ~Bilet() {};
 
+
     friend ostream& operator<<(ostream& os, const Bilet& bilet) {
         os << "Tip bilet: " << bilet.tip
         << " Pret: " << bilet.pret
@@ -81,11 +82,11 @@ private:
     string nume;
     int varsta;
     Bilet bilet;
-    int timp_petrecut;
-    vector<atractie> atractii_vizitate;
+    double timp_petrecut;
+    vector<string> atractii_vizitate;
 
 public:
-    vizitator(const string& nume = "", int varsta = 0, const Bilet& bilet = Bilet(), int timp_petrecut = 0)
+    vizitator(const string& nume = "", int varsta = 0, const Bilet& bilet = Bilet(), double timp_petrecut = 0.0)
         : nume(nume), varsta(varsta), bilet(bilet), timp_petrecut(timp_petrecut) {}
 
     vizitator(const vizitator& other)
@@ -103,18 +104,18 @@ public:
     }
     ~vizitator() {};
 
-    void add_atractii_vizitate(const atractie& atractie) {
-        atractii_vizitate.push_back(atractie);
+    void add_atractii_vizitate(const string& nume_atractie) {
+        atractii_vizitate.push_back(nume_atractie);
     }
 
     friend ostream& operator<<(ostream& os, const vizitator& vizit) {
         os << "Vizitator: " << vizit.nume
         << " varsta: " << vizit.varsta
         << " bilet: " << vizit.bilet
-        << " timp_petrecut: " << vizit.timp_petrecut
+        << " timp_petrecut: " << vizit.timp_petrecut << "ore"
         << " atractii_vizitate: ";
-        for(const auto& atractie : vizit.atractii_vizitate) {
-            os << "\n  -" << atractie;
+        for(const auto& nume_atractie : vizit.atractii_vizitate) {
+            os << "\n  -" << nume_atractie;
         }
         return os;
     }
@@ -122,7 +123,7 @@ public:
     int getVarsta() const {return varsta;}
     double getTimpPetrecut() const {return timp_petrecut;}
     Bilet getBilet() const {return bilet;}
-    const vector<atractie>& get_atractie() const {return atractii_vizitate;}
+    const vector<string>& get_atractie() const {return atractii_vizitate;}
 };
 
 class parc_distractie {
@@ -149,39 +150,11 @@ public:
     void add_vizitator(const vizitator& vizit) {
         vizitatori.push_back(vizit);
     }
-    void afis() const {
-        cout << "Vizitatori: ";
-        for(const auto& vizitator : vizitatori) {
-            cout << vizitator << endl;
-        }
-
-        cout << "atractii: ";
-        for(const auto& atractie : atractii) {
-            cout << atractie << endl;
-        }
-    }
-
-    double calcul_profit() const {
-        double total = 0.0;
-        for(const auto& vizitator : vizitatori) {
-            total += vizitator.getBilet().getPret();
-        }
-        return total;
-    }
-
-    double calcul_timp_medium() const {
-        if(vizitatori.empty()) return 0.0;
-            double total = 0.0;
-            for(const auto& vizitator : vizitatori) {
-                total += vizitator.getTimpPetrecut();
-            }
-            return total/vizitatori.size();
-    }
 
     void citire() {
         int nrVizitatori, nrAtractii, nrAtractiiVizitate;
 
-        cout << "numar de vizitatori: ";
+        cout << "Numar de vizitatori: ";
         cin >> nrVizitatori;
         for (int i = 0; i < nrVizitatori; i++) {
             string numeVizitator, tipBilet, numeAtractie, tipAtractie;
@@ -189,7 +162,7 @@ public:
             double pretBilet, durata;
             bool accesPrioritar;
 
-            cout << "\n datele despre vizitator " << (i + 1) << ":\n";
+            cout << "\n Datele despre vizitatorul " << (i + 1) << ":\n";
             cout << "Nume: ";
             cin >> numeVizitator;
             cout << "Varsta: ";
@@ -206,21 +179,19 @@ public:
             Bilet bilet(tipBilet, pretBilet, accesPrioritar);
             vizitator vizitator(numeVizitator, varsta, bilet, timpPetrecut);
 
-            cout << "Numarul de atractii vizitate de " << numeVizitator<< " ";
+            cout << "Numarul de atractii vizitate de " << numeVizitator<< ": ";
             cin >> nrAtractiiVizitate;
-            for(int i = 0; i < nrAtractiiVizitate; i++) {
+            for(int j = 0; j < nrAtractiiVizitate; j++) {
                 string numeAtractie;
                 cout << "Nume Atractie: ";
                 cin >> numeAtractie;
+                vizitator.add_atractii_vizitate(numeAtractie);
             }
-
-            atractie atractieVizitata(numeAtractie, inaltimeMinima, durata, tipAtractie);
-            vizitator.add_atractii_vizitate(atractieVizitata);
 
             add_vizitator(vizitator);
         }
 
-        cout << "\n numarul de atractii: ";
+        cout << "\n Numarul de atractii: ";
         cin >> nrAtractii;
         for (int i = 0; i < nrAtractii; i++) {
             string nume, tip;
@@ -241,12 +212,48 @@ public:
             add_atractie(atractie);
         }
     }
+
+    void afis() const {
+        cout << "Vizitatori:\n ";
+        for(const auto& vizitator : vizitatori) {
+            cout << vizitator << endl;
+        }
+
+        cout << "Atractii:\n ";
+        for(const auto& atractie : atractii) {
+            cout << atractie << endl;
+        }
+    }
+
+    double calcul_profit() const {
+        double total = 0.0;
+        for(const auto& vizitator : vizitatori) {
+            total += vizitator.getBilet().getPret();
+        }
+        return total;
+    }
+
+    double calcul_timp_mediu() const {
+        if(vizitatori.empty()) return 0.0;
+            double total = 0.0;
+            for(const auto& vizitator : vizitatori) {
+                total += vizitator.getTimpPetrecut();
+            }
+            return total/vizitatori.size();
+    }
+
+
 };
 
 int main() {
     parc_distractie Parc ;
     Parc.citire();
     Parc.afis();
+    double profit, timpMediu;
+    profit=Parc.calcul_profit();
+    timpMediu=Parc.calcul_timp_mediu();
+    cout << "Profitul este: \n" << profit;
+    cout << "Tmpul mediu petrecu de vizitatori este: \n" << timpMediu;
     return 0;
 }
 
