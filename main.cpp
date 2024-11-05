@@ -12,7 +12,7 @@ private:
 
     //constructor cu parametri
 public:
-    Bilet(const string& tip = "", double pret = 0.0, bool priority = false){
+    explicit Bilet(const string& tip = "", double pret = 0.0, bool priority = false){
         this->tip = tip;
         this->pret = pret;
         this->priority = priority;
@@ -25,10 +25,8 @@ public:
            << " Prioritate bilet: " << (bilet.priority ? "da" : "nu");
         return os;
     }
-    //getteri pentru bilet
-    double getPret() const { return pret; }
-    bool hasPriority() const { return priority; }
-    const string& getTip() const { return tip; }
+    //getter pentru bilet
+    [[nodiscard]]double getPret() const { return pret; }
 };
 
 class atractie {
@@ -40,7 +38,7 @@ private:
 
 public:
     // constructor cu parametri
-    atractie(const string& nume = "", int inaltime_minima = 0, double durata = 0.0, const string& tip = "") {
+    explicit atractie(const string& nume = "", int inaltime_minima = 0, double durata = 0.0, const string& tip = "") {
         this->nume= nume;
         this->inaltime_minima=inaltime_minima;
         this->durata= durata;
@@ -56,10 +54,8 @@ public:
         return os;
     }
 
-    // getteri
-    int getInaltimeMinima() const { return inaltime_minima; }
-    double getDurata() const { return durata; }
-    const string& getTip() const { return tip; }
+    // getter
+    [[nodiscard]] const string& getTip() const { return tip; }
 };
 
 class vizitator {
@@ -72,7 +68,7 @@ private:
 
 public:
     // constructor cu parametri
-    vizitator(const string& nume = "", int varsta = 0, const Bilet& bilet = Bilet(), double timp_petrecut = 0.0) {
+    explicit vizitator(const string& nume = "", int varsta = 0, const Bilet& bilet = Bilet(), double timp_petrecut = 0.0) {
         this->nume=nume;
         this->varsta= varsta;
         this->bilet=bilet;
@@ -96,11 +92,9 @@ public:
         return os;
     }
 
-    // getteri
-    int getVarsta() const { return varsta; }
-    double getTimpPetrecut() const { return timp_petrecut; }
-    const Bilet& getBilet() const { return bilet; }
-    const vector<string>& get_atractie() const { return atractii_vizitate; }
+    // getter
+    [[nodiscard]] double getTimpPetrecut() const { return timp_petrecut; }
+    [[nodiscard]] const Bilet& getBilet() const { return bilet; }
 };
 
 class parc_distractie {
@@ -109,7 +103,7 @@ private:
     vector<atractie> atractii;
 
 public:
-    parc_distractie() {}
+    parc_distractie() = default;
 
     // constructor de copiere
     parc_distractie(const parc_distractie& other){
@@ -126,7 +120,7 @@ public:
     }
 
     //destructor
-    ~parc_distractie() {}
+    ~parc_distractie() = default;
 
     // functie pentru a adauga o noua atractie
     void add_atractie(const atractie& atractie) {
@@ -227,7 +221,7 @@ public:
     }
 
     // functie pentru calcul profit
-    double calcul_profit() const {
+    [[nodiscard]] double calcul_profit() const {
         double total = 0.0;
         for(const auto& vizitator : vizitatori) {
             total += vizitator.getBilet().getPret();
@@ -236,21 +230,18 @@ public:
     }
 
     // functie pentru calcul timp mediu petrecut de vizitatori
-    double calcul_timp_mediu() const {
+    [[nodiscard]] double calcul_timp_mediu() const {
         if(vizitatori.empty()) return 0.0;
         double total = 0.0;
         for(const auto& vizitator : vizitatori) {
             total += vizitator.getTimpPetrecut();
         }
-        return total / vizitatori.size();
+        return total / static_cast<double>(vizitatori.size());
     }
 };
 
 int main() {
     parc_distractie parc;
-    parc_distractie parc2 = parc;
-    parc_distractie parc3;
-    parc3 = parc2;
 
     parc.citire();
 
