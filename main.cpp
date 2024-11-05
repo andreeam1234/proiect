@@ -106,10 +106,9 @@ public:
     parc_distractie() = default;
 
     // constructor de copiere
-    parc_distractie(const parc_distractie& other){
-        vizitatori = other.vizitatori;
-        atractii=other.atractii;
-    }
+    parc_distractie(const parc_distractie& other) = default;
+       // : vizitatori (other.vizitatori), atractii(other.atractii){}
+
     // operator de atribuire =
     parc_distractie& operator=(const parc_distractie& other) {
         if(this != &other) {
