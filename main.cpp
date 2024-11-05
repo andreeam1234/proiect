@@ -10,30 +10,22 @@ private:
     double pret;
     bool priority;
 
+    //constructor cu parametri
 public:
-    explicit Bilet(const string& tip = "", double pret = 0.0, bool priority = false)
-        : tip(tip), pret(pret), priority(priority) {}
+    Bilet(const string& tip = "", double pret = 0.0, bool priority = false){
+        this->tip = tip;
+        this->pret = pret;
+        this->priority = priority;
+}
 
-    Bilet(const Bilet& other) : tip(other.tip), pret(other.pret), priority(other.priority) {}
-
-    Bilet& operator=(const Bilet& other) {
-        if(this != &other) {
-            tip = other.tip;
-            pret = other.pret;
-            priority = other.priority;
-        }
-        return *this;
-    }
-
-    ~Bilet() {}
-
+    // operator << pentru afisare
     friend ostream& operator<<(ostream& os, const Bilet& bilet) {
-        os << "Tip bilet: " << bilet.tip
-           << " Pret: " << bilet.pret
+        os << "Tip bilet: " << bilet.tip << endl
+           << " Pret: " << bilet.pret << endl
            << " Prioritate bilet: " << (bilet.priority ? "da" : "nu");
         return os;
     }
-
+    //getteri pentru bilet
     double getPret() const { return pret; }
     bool hasPriority() const { return priority; }
     const string& getTip() const { return tip; }
@@ -47,31 +39,24 @@ private:
     string tip;
 
 public:
-    explicit atractie(const string& nume = "", int inaltime_minima = 0, double durata = 0.0, const string& tip = "")
-        : nume(nume), inaltime_minima(inaltime_minima), durata(durata), tip(tip) {}
-
-    atractie(const atractie& other) : nume(other.nume), inaltime_minima(other.inaltime_minima), durata(other.durata), tip(other.tip) {}
-
-    atractie& operator=(const atractie& other) {
-        if(this != &other) {
-            nume = other.nume;
-            inaltime_minima = other.inaltime_minima;
-            durata = other.durata;
-            tip = other.tip;
-        }
-        return *this;
+    // constructor cu parametri
+    atractie(const string& nume = "", int inaltime_minima = 0, double durata = 0.0, const string& tip = "") {
+        this->nume= nume;
+        this->inaltime_minima=inaltime_minima;
+        this->durata= durata;
+        this->tip= tip;
     }
 
-    ~atractie() {}
-
+    // opperator << pentru afisare
     friend ostream& operator<<(ostream& os, const atractie& atractie) {
-        os << "Atractie: " << atractie.nume
-           << " Inaltime minima: " << atractie.inaltime_minima
-           << " Durata: " << atractie.durata
-           << " Tip: " << atractie.tip;
+        os << "Atractie: " << atractie.nume << endl
+           << " Inaltime minima: " << atractie.inaltime_minima << endl
+           << " Durata: " << atractie.durata << endl
+           << " Tip: " << atractie.tip << endl;
         return os;
     }
 
+    // getteri
     int getInaltimeMinima() const { return inaltime_minima; }
     double getDurata() const { return durata; }
     const string& getTip() const { return tip; }
@@ -86,41 +71,32 @@ private:
     vector<string> atractii_vizitate;
 
 public:
-    explicit vizitator(const string& nume = "", int varsta = 0, const Bilet& bilet = Bilet(), double timp_petrecut = 0.0)
-        : nume(nume), varsta(varsta), bilet(bilet), timp_petrecut(timp_petrecut) {}
-
-    vizitator(const vizitator& other)
-        : nume(other.nume), varsta(other.varsta), bilet(other.bilet), timp_petrecut(other.timp_petrecut), atractii_vizitate(other.atractii_vizitate) {}
-
-    vizitator& operator=(const vizitator& other) {
-        if(this != &other) {
-            nume = other.nume;
-            varsta = other.varsta;
-            bilet = other.bilet;
-            timp_petrecut = other.timp_petrecut;
-            atractii_vizitate = other.atractii_vizitate;
-        }
-        return *this;
+    // constructor cu parametri
+    vizitator(const string& nume = "", int varsta = 0, const Bilet& bilet = Bilet(), double timp_petrecut = 0.0) {
+        this->nume=nume;
+        this->varsta= varsta;
+        this->bilet=bilet;
+        this->timp_petrecut=timp_petrecut;
     }
-
-    ~vizitator() {}
 
     void add_atractii_vizitate(const string& nume_atractie) {
         atractii_vizitate.push_back(nume_atractie);
     }
 
     friend ostream& operator<<(ostream& os, const vizitator& vizit) {
-        os << "Vizitator: " << vizit.nume
-           << " varsta: " << vizit.varsta
-           << " bilet: " << vizit.bilet
-           << " timp_petrecut: " << vizit.timp_petrecut << " ore"
+        os << "Vizitator: " << vizit.nume << endl
+           << " varsta: " << vizit.varsta << endl
+           << " " << vizit.bilet << endl
+           << " timp_petrecut: " << vizit.timp_petrecut << " ore" << endl
            << " atractii_vizitate: ";
         for(const auto& nume_atractie : vizit.atractii_vizitate) {
             os << "\n  -" << nume_atractie;
         }
+        os << endl;
         return os;
     }
 
+    // getteri
     int getVarsta() const { return varsta; }
     double getTimpPetrecut() const { return timp_petrecut; }
     const Bilet& getBilet() const { return bilet; }
@@ -135,8 +111,12 @@ private:
 public:
     parc_distractie() {}
 
-    parc_distractie(const parc_distractie& other) : vizitatori(other.vizitatori), atractii(other.atractii) {}
-
+    // constructor de copiere
+    parc_distractie(const parc_distractie& other){
+        vizitatori = other.vizitatori;
+        atractii=other.atractii;
+    }
+    // operator de atribuire =
     parc_distractie& operator=(const parc_distractie& other) {
         if(this != &other) {
             vizitatori = other.vizitatori;
@@ -145,79 +125,95 @@ public:
         return *this;
     }
 
+    //destructor
     ~parc_distractie() {}
 
+    // functie pentru a adauga o noua atractie
     void add_atractie(const atractie& atractie) {
         atractii.push_back(atractie);
     }
 
+    // functie pentru a adauga un nou vizitator
     void add_vizitator(const vizitator& vizit) {
         vizitatori.push_back(vizit);
     }
-
+    // citire date despre vizitatori si atractii
     void citire() {
         int nrVizitatori, nrAtractii, nrAtractiiVizitate;
 
         cout << "Numar de vizitatori: ";
         cin >> nrVizitatori;
+        cin.ignore();
+
         for (int i = 0; i < nrVizitatori; i++) {
             string numeVizitator, tipBilet;
             int varsta, timpPetrecut;
             double pretBilet;
-            bool accesPrioritar;
+            bool priority;
 
             cout << "\n Datele despre vizitatorul " << (i + 1) << ":\n";
             cout << "Nume: ";
-            cin >> numeVizitator;
+            getline(cin, numeVizitator);
             cout << "Varsta: ";
             cin >> varsta;
+            cin.ignore();
             cout << "Tip Bilet: ";
-            cin >> tipBilet;
+            getline(cin, tipBilet);
             cout << "Pret Bilet: ";
             cin >> pretBilet;
+            cin.ignore();
             cout << "Acces Prioritar (1 - Da, 0 - Nu): ";
-            cin >> accesPrioritar;
+            cin >> priority;
             cout << "Timp Petrecut (ore): ";
             cin >> timpPetrecut;
+            cin.ignore();
 
-            Bilet bilet(tipBilet, pretBilet, accesPrioritar);
+            //crearea biletului si a vizitatorului
+            Bilet bilet(tipBilet, pretBilet, priority);
             vizitator vizitator(numeVizitator, varsta, bilet, timpPetrecut);
 
+            // atractii vizitate de clienti
             cout << "Numarul de atractii vizitate de " << numeVizitator << ": ";
             cin >> nrAtractiiVizitate;
+            cin.ignore();
             for(int j = 0; j < nrAtractiiVizitate; j++) {
                 string numeAtractie;
                 cout << "Nume Atractie: ";
-                cin >> numeAtractie;
+                getline(cin, numeAtractie);
                 vizitator.add_atractii_vizitate(numeAtractie);
             }
-
+            // adaugare vizitator la lista
             add_vizitator(vizitator);
         }
 
+        // citire date despre atractii
         cout << "\n Numarul de atractii: ";
         cin >> nrAtractii;
+        cin.ignore();
         for (int i = 0; i < nrAtractii; i++) {
             string nume, tip;
-            int inaltimeMinima; // Only declare if you use it later
-            double durata; // Only declare if you use it later
+            int inaltimeMinima;
+            double durata;
 
             cout << "\nIntroduceti datele pentru atractia " << (i + 1) << ":\n";
             cout << "Nume: ";
-            cin >> nume;
+            getline(cin, nume);
             cout << "Inaltime Minima (cm): ";
             cin >> inaltimeMinima;
+            cin.ignore();
             cout << "Durata (minute): ";
             cin >> durata;
+            cin.ignore();
             cout << "Tip: ";
-            cin >> tip;
+            getline(cin, tip);
 
+            // creare atractie si adaugare atractie
             atractie atractie(nume, inaltimeMinima, durata, tip);
             add_atractie(atractie);
         }
     }
 
-
+    // afisare vizitatori si atractii
     void afis() const {
         cout << "Vizitatori:\n";
         for(const auto& vizitator : vizitatori) {
@@ -230,6 +226,7 @@ public:
         }
     }
 
+    // functie pentru calcul profit
     double calcul_profit() const {
         double total = 0.0;
         for(const auto& vizitator : vizitatori) {
@@ -238,6 +235,7 @@ public:
         return total;
     }
 
+    // functie pentru calcul timp mediu petrecut de vizitatori
     double calcul_timp_mediu() const {
         if(vizitatori.empty()) return 0.0;
         double total = 0.0;
@@ -250,6 +248,10 @@ public:
 
 int main() {
     parc_distractie parc;
+    parc_distractie parc2 = parc;
+    parc_distractie parc3;
+    parc3 = parc2;
+
     parc.citire();
 
     cout << "\nAfisarea informatiilor despre parc:\n";
