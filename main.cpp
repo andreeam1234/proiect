@@ -54,8 +54,6 @@ public:
         return os;
     }
 
-    // getter
-    [[nodiscard]] const string& getTip() const { return tip; }
 };
 
 class vizitator {
