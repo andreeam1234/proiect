@@ -13,9 +13,9 @@
 int main() {
     Park park("Adventure Park");
 
-    auto ferrisWheel = std::make_shared<FerrisWheel>("Big Wheel", 10.0, 120, 10);
-    auto carousel = std::make_shared<Carousel>("Magic Carousel", 5.0, 100, 20);
-    auto rollerCoaster = std::make_shared<RollerCoaster>("Speed Racer", 2.0, 140, 80);
+    auto ferrisWheel = std::make_shared<FerrisWheel>("Big Wheel", 10.0, 120, 10, 50);
+    auto carousel = std::make_shared<Carousel>("Magic Carousel", 5.0, 100, 20, 70);
+    auto rollerCoaster = std::make_shared<RollerCoaster>("Speed Racer", 2.0, 140, 80, 40);
 
     park.addAttraction(ferrisWheel);
     park.addAttraction(carousel);

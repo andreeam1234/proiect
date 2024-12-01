@@ -1,7 +1,7 @@
 #include "RollerCoaster.h"
 #include <iostream>
 
-RollerCoaster::RollerCoaster(const std::string& name, double duration, int minHeight, int speed)
+RollerCoaster::RollerCoaster(const std::string& name, double duration, int minHeight, int speed, int maxVisitors)
     : Attraction(name, duration, minHeight), speed(speed) {};
 
 void RollerCoaster::simulateExperience() const {

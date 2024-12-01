@@ -8,10 +8,10 @@ private:
     int speed;
 
 public:
-    explicit RollerCoaster(const std::string& name, double duration, int minHeight, int speed);
+    explicit RollerCoaster(const std::string& name, double duration, int minHeight, int speed, int maxVisitors);
 
     void simulateExperience() const override;
-    RollerCoaster *clone() const override;
+    [[nodiscard]]RollerCoaster *clone() const override;
 };
 
 #endif

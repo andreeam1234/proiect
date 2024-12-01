@@ -1,7 +1,7 @@
 #include "Carousel.h"
 #include <iostream>
 
-Carousel::Carousel(const std::string& name, double duration, int minHeight, int maxCapacity)
+Carousel::Carousel(const std::string& name, double duration, int minHeight, int maxCapacity, int maxVisitors)
     : Attraction(name, duration, minHeight), maxCapacity(maxCapacity) {}
 
 void Carousel::simulateExperience() const {
