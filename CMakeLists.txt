@@ -54,6 +54,19 @@ add_executable(${PROJECT_NAME}
     main.cpp
     generated/src/Helper.cpp
     env_fixes.h
+        generated/include/Ticket.h
+        generated/include/Attraction.h
+        generated/include/FerrisWheel.h
+        generated/include/Carousel.h
+        generated/include/Park.h
+        generated/src/Visitor.cpp
+        generated/src/Attraction.cpp
+        generated/include/RollerCoaster.h
+        generated/src/RollerCoaster.cpp
+        generated/src/FerrisWheel.cpp
+        generated/src/Carousel.cpp
+        generated/src/Ticket.cpp
+        generated/src/Park.cpp
 )
 
 include(cmake/CompilerFlags.cmake)

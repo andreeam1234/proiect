@@ -1,2 +1,53 @@
-5
-11 22 33 44 55
+Numar de vizitatori: 2
+
+ Datele despre vizitatorul 1:
+Nume: Andreea
+Varsta: 19
+Tip Bilet: Standard
+Pret Bilet: 60
+Acces Prioritar (1 - Da, 0 - Nu): 0
+Timp Petrecut (ore): 3
+Numarul de atractii vizitate de Andreea: 2
+Nume Atractie: Rollercoaster
+Nume Atractie: Bumper cars
+
+ Datele despre vizitatorul 2:
+Nume: Maria
+Varsta: 10
+Tip Bilet: Premium
+Pret Bilet: 100
+Acces Prioritar (1 - Da, 0 - Nu): 1
+Timp Petrecut (ore): 3
+Numarul de atractii vizitate de Maria: 2
+Nume Atractie: Carusel
+Nume Atractie: Zid de escaladare
+
+ Numarul de atractii: 4
+
+Introduceti datele pentru atractia 1:
+Nume: Zid de escaladare
+Inaltime Minima (cm): 120
+Durata (minute): 15
+Tip: Sport
+
+Introduceti datele pentru atractia 2:
+Nume: Bumper cars
+Inaltime Minima (cm): 100
+Durata (minute): 5
+Tip: Familie
+
+Introduceti datele pentru atractia 3:
+Nume: Carusel
+Inaltime Minima (cm): 110
+Durata (minute): 10
+Tip: Copii
+
+Introduceti datele pentru atractia 4:
+Nume: Rollercoaster
+Inaltime Minima (cm): 150
+Durata (minute): 10
+Tip: Adrenalina
+
+
+
+
