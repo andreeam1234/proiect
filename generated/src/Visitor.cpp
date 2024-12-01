@@ -1,9 +1,10 @@
 #include "Visitor.h"
+#include "Park.h"
 #include <iostream>
 #include "VisitorTooShortException.h"
 
 Visitor::Visitor(std::string name, int age, int height, std::shared_ptr<Ticket> ticket)
-    : name(std::move(name)), age(age), height(height), ticket(std::move(ticket)) {}
+    : name(std::move(name)), age(age), height(height), ticket(std::move(ticket)), timeSpent(0) {}
 
 void Visitor::printTicketInfo() const {
     std::cout << name << "'s Ticket:\n";
@@ -29,6 +30,13 @@ int Visitor::getAge() const {
 
 int Visitor::getHeight() const {
     return height;
+}
+double Visitor::getTimeSpent() const {
+    return timeSpent;
+}
+
+void Visitor::visitPark() {
+    Park::incrementTotalVisitors();
 }
 
 std::shared_ptr<Ticket> Visitor::getTicket() const {

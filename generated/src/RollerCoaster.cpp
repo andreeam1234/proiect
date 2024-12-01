@@ -8,7 +8,4 @@ void RollerCoaster::simulateExperience() const {
     std::cout << "Experience the thrill of" << getName() << "at a top speed of" << speed<< "km/h!\n" << std::endl;
 }
 
-RollerCoaster* RollerCoaster::clone() const {
-    return new RollerCoaster(*this);
-}
 

@@ -10,8 +10,12 @@ private:
 public:
     explicit RollerCoaster(const std::string& name, double duration, int minHeight, int speed, int maxVisitors);
 
+    void screamTest() const {
+        std::cout << "People are screaming on the Roller Coaster: " << name << "!\n";
+    }
+
     void simulateExperience() const override;
-    [[nodiscard]]RollerCoaster *clone() const override;
+
 };
 
 #endif

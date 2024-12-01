@@ -7,6 +7,3 @@ Carousel::Carousel(const std::string& name, double duration, int minHeight, int 
 void Carousel::simulateExperience() const {
     std::cout << "Take a magical ride on the " << getName() << "with up to " << maxCapacity << "riders at the same time!\n" ;
 }
-Carousel *Carousel::clone() const {
-    return new Carousel(*this);
-}

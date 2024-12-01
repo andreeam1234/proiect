@@ -10,7 +10,11 @@ public:
     explicit Carousel(const std::string& name, double duration, int minHeight, int maxCapacity, int maxVisitors);
 
     void simulateExperience() const override;
-    [[nodiscard]]Carousel *clone() const override;
+    void spinAround() const {
+        std::cout << "The Carousel " << name << " is spinning and kids are having fun!\n";
+    }
+
+
 };
 
 #endif

@@ -4,6 +4,7 @@
 #include <string>
 #include <iostream>
 
+
 class Attraction {
 protected:
     std::string name;
@@ -14,7 +15,8 @@ protected:
 
 public:
     Attraction(const std::string& name, double duration, int minHeight, int maxVisitors);
-    virtual ~Attraction() = default;
+    Attraction(const Attraction& other);
+    Attraction& operator=(Attraction other);
 
     [[nodiscard]] std::string getName() const;
     [[nodiscard]] double getDuration() const;
@@ -24,9 +26,12 @@ public:
 
     virtual void simulateExperience() const;
     void addVisitor();
-    [[nodiscard]]virtual Attraction* clone() const = 0;
+    virtual ~Attraction() = default;
 
+    virtual void describe() const;
     friend std::ostream& operator<<(std::ostream& os, const Attraction& attraction);
+
+    friend void swap(Attraction& first, Attraction& second) noexcept;
 };
 
 #endif

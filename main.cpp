@@ -25,7 +25,10 @@ int main() {
     auto ticket2 = std::make_shared<Ticket>(30.0, "Child", false);
 
     auto visitor1 = std::make_shared<Visitor>("John", 25, 180, ticket1);
-    auto visitor2 = std::make_shared<Visitor>("Alice", 10, 90, ticket2); // Alice este prea mică pentru unele atracții
+    auto visitor2 = std::make_shared<Visitor>("Alice", 4, 90, ticket2);
+
+    visitor1->visitPark();
+    visitor2->visitPark();
 
     park.addVisitor(visitor1);
     park.addVisitor(visitor2);
@@ -37,7 +40,6 @@ int main() {
         park.visitAttractions();
 
         std::cout << "Total profit: " << park.calcTotalProfit() << "$" << std::endl;
-        std::cout << "Average time spent: " << park.averageTimeSpent() << " minutes" << std::endl;
     }
     catch (const MaxVisitorsExceededException& e) {
         std::cout << e.what() << std::endl;
