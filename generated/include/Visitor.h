@@ -9,17 +9,19 @@
 class Visitor {
     std::string name;
     int age;
+    int height;
     std::shared_ptr<Ticket> ticket;
 
 public:
-    explicit Visitor(std::string name, int age, std::shared_ptr<Ticket> ticket);
+    Visitor(std::string name, int age, int height, std::shared_ptr<Ticket> ticket);
 
     [[nodiscard]] std::string getName() const;
     [[nodiscard]] int getAge() const;
+    [[nodiscard]] int getHeight() const;
     [[nodiscard]] std::shared_ptr<Ticket> getTicket() const;
 
     void printTicketInfo() const;
     void visitAttraction(const std::shared_ptr<Attraction>& attraction) const;
 };
 
-#endif
+#endif // VISITOR_H

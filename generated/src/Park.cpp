@@ -1,5 +1,8 @@
 #include "Park.h"
 #include <iostream>
+#include "VisitorTooShortException.h"
+#include "TicketInvalidException.h"
+#include "MaxVisitorsExceededException.h"
 
 Park::Park(const std::string& name) : name(name) {}
 
@@ -28,29 +31,44 @@ void Park::showVisitors() const {
 void Park::visitAttractions() const {
     for (const auto& visitor : visitors) {
         for (const auto& attraction : attractions) {
-            visitor->visitAttraction(attraction);
+            try {
+                visitor->visitAttraction(attraction);
+            } catch (const VisitorTooShortException& e) {
+                std::cout << visitor->getName() << " is too short to visit " << attraction->getName() << "\n";
+                std::cout << e.what() << std::endl;  // Poți folosi e pentru a afișa un mesaj de eroare detaliat
+            } catch (const MaxVisitorsExceededException& e) {
+                std::cout << "Max visitors exceeded for " << attraction->getName() << "\n";
+                std::cout << e.what() << std::endl;
+            }
         }
     }
 }
+
 
 double Park::calcTotalProfit() const {
     double totalProfit = 0;
 
-    for(const auto& visitor : visitors) {
-        totalProfit += visitor->getTicket()->getPrice();
+    for (const auto& visitor : visitors) {
+        // Verificăm dacă vizitatorul are un bilet valid
+        if (!visitor->getTicket() || visitor->getTicket()->getPrice() <= 0) {
+            throw TicketInvalidException();  // Aruncăm excepția dacă biletul este invalid
+        }
+
+        totalProfit += visitor->getTicket()->getPrice();  // Adăugăm prețul biletului la profit
     }
+
     return totalProfit;
 }
 
 double Park::averageTimeSpent() const {
+
     double totalTime = 0;
     int numberVisitors = 0;
 
-    for(const auto& visitor : visitors) {
-        {
-            totalTime += visitor->getTicket()->getPrice();
-        }
+    for (const auto& visitor : visitors) {
+        totalTime += visitor->getTicket()->getPrice();
         numberVisitors++;
     }
     return (numberVisitors > 0) ? totalTime / numberVisitors : 0.0;
 }
+

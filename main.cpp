@@ -5,6 +5,9 @@
 #include "RollerCoaster.h"
 #include "Visitor.h"
 #include "Ticket.h"
+#include "MaxVisitorsExceededException.h"
+#include "TicketInvalidException.h"
+#include "VisitorTooShortException.h"
 #include <iostream>
 
 int main() {
@@ -18,22 +21,33 @@ int main() {
     park.addAttraction(carousel);
     park.addAttraction(rollerCoaster);
 
-    auto ticket1 = std::make_shared<Ticket>(50.0, "Adult");
-    auto ticket2 = std::make_shared<Ticket>(30.0, "Child");
+    auto ticket1 = std::make_shared<Ticket>(50.0, "Adult", true);
+    auto ticket2 = std::make_shared<Ticket>(30.0, "Child", false);
 
-    auto visitor1 = std::make_shared<Visitor>("John", 25, ticket1);
-    auto visitor2 = std::make_shared<Visitor>("Alice", 10, ticket2);
+    auto visitor1 = std::make_shared<Visitor>("John", 25, 180, ticket1);
+    auto visitor2 = std::make_shared<Visitor>("Alice", 10, 90, ticket2); // Alice este prea mică pentru unele atracții
 
     park.addVisitor(visitor1);
     park.addVisitor(visitor2);
 
-    park.showAttractions();
-    park.showVisitors();
+    try {
+        park.showAttractions();
+        park.showVisitors();
 
-    park.visitAttractions();
+        park.visitAttractions();
 
-    std::cout << "Total profit: " << park.calcTotalProfit() << "$" << std::endl;
-    std::cout << "Average time spent: " << park.averageTimeSpent() << " minutes" << std::endl;
+        std::cout << "Total profit: " << park.calcTotalProfit() << "$" << std::endl;
+        std::cout << "Average time spent: " << park.averageTimeSpent() << " minutes" << std::endl;
+    }
+    catch (const MaxVisitorsExceededException& e) {
+        std::cout << e.what() << std::endl;
+    }
+    catch (const TicketInvalidException& e) {
+        std::cout << e.what() << std::endl;
+    }
+    catch (const VisitorTooShortException& e) {
+        std::cout << e.what() << std::endl;
+    }
 
     return 0;
 }

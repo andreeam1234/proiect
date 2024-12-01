@@ -1,14 +1,14 @@
-// Park.h
 #ifndef PARK_H
 #define PARK_H
 
 #include <string>
 #include <vector>
 #include <memory>
-#include "Attraction.h"
 #include "Visitor.h"
+#include "Attraction.h"
 
 class Park {
+private:
     std::string name;
     std::vector<std::shared_ptr<Attraction>> attractions;
     std::vector<std::shared_ptr<Visitor>> visitors;
@@ -21,9 +21,8 @@ public:
     void showAttractions() const;
     void showVisitors() const;
     void visitAttractions() const;
-
-    double calcTotalProfit() const;
-    double averageTimeSpent() const;
+    [[nodiscard]]double calcTotalProfit() const;
+    [[nodiscard]]double averageTimeSpent() const;
 };
 
-#endif
+#endif // PARK_H

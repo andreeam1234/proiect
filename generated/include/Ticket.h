@@ -4,14 +4,19 @@
 #include <string>
 
 class Ticket {
-    double price;
     std::string type;
+    double price;
+    bool isValid;
 
 public:
-    Ticket(double price, std::string type);
+    Ticket(double price, const std::string& type, bool isValid);
 
-    [[nodiscard]] double getPrice() const;
     [[nodiscard]] std::string getType() const;
+    [[nodiscard]] double getPrice() const;
+    [[nodiscard]] bool isValidTicket() const;
+
+    void validate() const;  // Funcție ce aruncă excepție
+    void printInfo() const;
 };
 
 #endif

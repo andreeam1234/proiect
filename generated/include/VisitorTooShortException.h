@@ -5,15 +5,10 @@
 #include <string>
 
 class VisitorTooShortException : public std::exception {
-private:
-    std::string message;
 public:
-    VisitorTooShortException()
-        : message_("The visitor is too short to ride this attraction.") {}
-
-    const char* what() const noexcept override {
-        return message_.c_str();
+    [[nodiscard]] const char* what() const noexcept override {
+        return "The visitor is too short for this attraction!";
     }
 };
 
-#endif //VISITORTOOSHORTEXCEPTION_H
+#endif // VISITORTOOSHORTEXCEPTION_H

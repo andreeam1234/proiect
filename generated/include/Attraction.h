@@ -9,23 +9,22 @@ protected:
     std::string name;
     double duration;
     int minHeight;
+    int maxVisitors;
+    int currentVisitors;
 
 public:
-    explicit Attraction(const std::string& name, double duration, int minHeight);
+    Attraction(const std::string& name, double duration, int minHeight, int maxVisitors);
     virtual ~Attraction() = default;
 
-    [[nodiscard]] std::string getName() const {
-        return name;
-    };
-    [[nodiscard]] double getDuration() const {
-        return duration;
-    }
-    [[nodiscard]] int getMinHeight() const {
-        return minHeight;
-    }
+    [[nodiscard]] std::string getName() const;
+    [[nodiscard]] double getDuration() const;
+    [[nodiscard]] int getMinHeight() const;
+    [[nodiscard]] int getMaxVisitors() const;
+    [[nodiscard]] int getCurrentVisitors() const;
 
-    virtual void simulateExperience() const = 0;
-    virtual Attraction* clone() const = 0;
+    virtual void simulateExperience() const;
+    void addVisitor();
+    [[nodiscard]]virtual Attraction* clone() const = 0;
 
     friend std::ostream& operator<<(std::ostream& os, const Attraction& attraction);
 };

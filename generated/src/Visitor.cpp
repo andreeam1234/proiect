@@ -1,8 +1,9 @@
 #include "Visitor.h"
 #include <iostream>
+#include "VisitorTooShortException.h"
 
-Visitor::Visitor(std::string name, int age, std::shared_ptr<Ticket> ticket)
-    : name(std::move(name)), age(age), ticket(std::move(ticket)) {}
+Visitor::Visitor(std::string name, int age, int height, std::shared_ptr<Ticket> ticket)
+    : name(std::move(name)), age(age), height(height), ticket(std::move(ticket)) {}
 
 void Visitor::printTicketInfo() const {
     std::cout << name << "'s Ticket:\n";
@@ -11,11 +12,11 @@ void Visitor::printTicketInfo() const {
 }
 
 void Visitor::visitAttraction(const std::shared_ptr<Attraction>& attraction) const {
-    if (age >= attraction->getMinHeight()) {
-        attraction->simulateExperience();
-    } else {
-        std::cout << name << " is not tall enough to visit " << attraction->getName() << "!\n";
+    if (height < attraction->getMinHeight()) {
+        throw VisitorTooShortException();
     }
+    std::cout << name << " is visiting " << attraction->getName() << "!\n";
+    attraction->simulateExperience();
 }
 
 std::string Visitor::getName() const {
@@ -24,6 +25,10 @@ std::string Visitor::getName() const {
 
 int Visitor::getAge() const {
     return age;
+}
+
+int Visitor::getHeight() const {
+    return height;
 }
 
 std::shared_ptr<Ticket> Visitor::getTicket() const {
