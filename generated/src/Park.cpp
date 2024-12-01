@@ -1,13 +1,13 @@
 #include "Park.h"
 #include <iostream>
 
-Park::Park(const std::string& name) : name(name) {}  // referință constantă
+Park::Park(const std::string& name) : name(name) {}
 
-void Park::addAttraction(const std::shared_ptr<Attraction>& attraction) {  // folosește referință constantă
+void Park::addAttraction(const std::shared_ptr<Attraction>& attraction) {
     attractions.push_back(attraction);
 }
 
-void Park::addVisitor(const std::shared_ptr<Visitor>& visitor) {  // folosește referință constantă
+void Park::addVisitor(const std::shared_ptr<Visitor>& visitor) {
     visitors.push_back(visitor);
 }
 
@@ -37,9 +37,7 @@ double Park::calcTotalProfit() const {
     double totalProfit = 0;
 
     for(const auto& visitor : visitors) {
-        for(const auto& attraction : attractions) {
-            totalProfit += visitor->getTicket()->getPrice();
-        }
+        totalProfit += visitor->getTicket()->getPrice();
     }
     return totalProfit;
 }
@@ -49,7 +47,7 @@ double Park::averageTimeSpent() const {
     int numberVisitors = 0;
 
     for(const auto& visitor : visitors) {
-        for(const auto& attraction : attractions) {
+        {
             totalTime += visitor->getTicket()->getPrice();
         }
         numberVisitors++;
