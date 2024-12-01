@@ -21,6 +21,9 @@ public:
     void showAttractions() const;
     void showVisitors() const;
     void visitAttractions() const;
+
+    double calcTotalProfit() const;
+    double averageTimeSpent() const;
 };
 
-#endif  // PARK_H
+#endif

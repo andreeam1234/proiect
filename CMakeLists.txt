@@ -52,8 +52,6 @@ endif()
 # NOTE: update executable name in .github/workflows/cmake.yml:25 when changing name here
 add_executable(${PROJECT_NAME}
     main.cpp
-    generated/src/Helper.cpp
-    env_fixes.h
         generated/include/Ticket.h
         generated/include/Attraction.h
         generated/include/FerrisWheel.h
@@ -67,6 +65,8 @@ add_executable(${PROJECT_NAME}
         generated/src/Carousel.cpp
         generated/src/Ticket.cpp
         generated/src/Park.cpp
+        generated/include/VisitorTooShortException.h
+        generated/include/TicketInvalidException.h
 )
 
 include(cmake/CompilerFlags.cmake)
@@ -74,12 +74,12 @@ include(cmake/CompilerFlags.cmake)
 ###############################################################################
 
 # use SYSTEM so cppcheck and clang-tidy do not report warnings from these directories
-target_include_directories(${PROJECT_NAME} SYSTEM PRIVATE generated/include)
+#target_include_directories(${PROJECT_NAME} SYSTEM PRIVATE generated/include)
 # target_include_directories(${PROJECT_NAME} SYSTEM PRIVATE ext/<SomeHppLib>/include)
-target_include_directories(${PROJECT_NAME} SYSTEM PRIVATE ${SFML_SOURCE_DIR}/include)
-target_link_directories(${PROJECT_NAME} PRIVATE ${SFML_BINARY_DIR}/lib)
-target_link_libraries(${PROJECT_NAME} PRIVATE sfml-graphics sfml-window sfml-system Threads::Threads)
-
+#target_include_directories(${PROJECT_NAME} SYSTEM PRIVATE ${SFML_SOURCE_DIR}/include)
+#target_link_directories(${PROJECT_NAME} PRIVATE ${SFML_BINARY_DIR}/lib)
+#target_link_libraries(${PROJECT_NAME} PRIVATE sfml-graphics sfml-window sfml-system Threads::Threads)
+include_directories(${PROJECT_NAME} generated/include)
 if(APPLE)
 elseif(UNIX)
     target_link_libraries(${PROJECT_NAME} PRIVATE X11)

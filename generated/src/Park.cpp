@@ -32,3 +32,27 @@ void Park::visitAttractions() const {
         }
     }
 }
+
+double Park::calcTotalProfit() const {
+    double totalProfit = 0;
+
+    for(const auto& visitor : visitors) {
+        for(const auto& attraction : attractions) {
+            totalProfit += visitor->getTicket()->getPrice();
+        }
+    }
+    return totalProfit;
+}
+
+double Park::averageTimeSpent() const {
+    double totalTime = 0;
+    int numberVisitors = 0;
+
+    for(const auto& visitor : visitors) {
+        for(const auto& attraction : attractions) {
+            totalTime += visitor->getTicket()->getPrice();
+        }
+        numberVisitors++;
+    }
+    return (numberVisitors > 0) ? totalTime / numberVisitors : 0.0;
+}

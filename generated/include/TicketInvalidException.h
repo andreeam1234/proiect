@@ -1,0 +1,8 @@
+//
+// Created by Vasile on 12/1/2024.
+//
+
+#ifndef TICKETINVALIDEXCEPTION_H
+#define TICKETINVALIDEXCEPTION_H
+
+#endif //TICKETINVALIDEXCEPTION_H

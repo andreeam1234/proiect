@@ -32,5 +32,8 @@ int main() {
 
     park.visitAttractions();
 
+    std::cout << "Total profit: " << park.calcTotalProfit() << "$" << std::endl;
+    std::cout << "Average time spent: " << park.averageTimeSpent() << " minutes" << std::endl;
+
     return 0;
 }
