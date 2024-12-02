@@ -36,7 +36,6 @@ int main() {
     auto ferrisWheel = std::make_shared<FerrisWheel>("Big Wheel", 10.0, 120, 10, 50);
     auto carousel = std::make_shared<Carousel>("Magic Carousel", 5.0, 100, 20, 70);
     auto rollerCoaster = std::make_shared<RollerCoaster>("Speed Racer", 2.0, 140, 80, 40);
-
     /**
      * @brief Add the attractions to the park.
      */
@@ -84,6 +83,13 @@ int main() {
          * @brief Calculate and display the total profit of the park.
          */
         std::cout << "Total profit: " << park.calcTotalProfit() << "$" << std::endl;
+        park.incrementTotalVisitors();
+        std::cout << "Total visitors: " << park.getTotalVisitors() << std::endl;
+     /**
+         * @brief Calculate and display the average time spent by visitors.
+         */
+        double avgTime = park.averageTimeSpent();
+        std::cout << "Average time spent by visitors at attractions: " << avgTime << " minutes." << std::endl;
     }
     catch (const MaxVisitorsExceededException& e) {
         /**

@@ -54,11 +54,3 @@ void Ticket::validate() const {
     }
 }
 
-/**
- * @brief Prints information about the ticket.
- *
- * Displays the type, price, and validity status of the ticket.
- */
-void Ticket::printInfo() const {
-    std::cout << "Ticket Type: " << type << ", Price: " << price << ", Valid: " << (isValid ? "Yes" : "No") << std::endl;
-}

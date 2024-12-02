@@ -55,13 +55,6 @@ public:
      * @throws std::invalid_argument if the ticket is invalid.
      */
     void validate() const;
-
-    /**
-     * @brief Prints the ticket information.
-     *
-     * This function prints details of the ticket, including its type, price, and validity.
-     */
-    void printInfo() const;
 };
 
 #endif // TICKET_H

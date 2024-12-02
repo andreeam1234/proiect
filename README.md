@@ -1,3 +1,20 @@
+This project represents a simulation of an amusement park, which includes attractions, such as Ferris Wheel, Carousel and Roller Coaster, visitors and tickets.
+The project provides functionalities that allow adding attractions, visitors and managing them.
+Exceptions are implemented for attractions that have exceeded the number of visitors, invalid tickets, visitors that are too short to ride certain attractions.
+
+The project is structured in several classes:
+1. Attraction Class with derived classes:
+a) Ferris Wheel
+b) Carousel
+c) Roller Coaster
+2. Visitor
+3. Ticket
+4. Park
+
+
+
+
+
 # Nu primesc notă pentru că nu am pus titlu și descriere
 
 ### Important!

@@ -30,10 +30,9 @@ void Visitor::printTicketInfo() const {
 /**
  * @brief Visitor visits an attraction.
  *
- * Simulates the experience at the attraction. If the visitor's height is below
- * the minimum height required for the attraction, throws a VisitorTooShortException.
+ * Simulates the experience at the attraction.
  *
- * @param attraction The attraction the visitor is visiting.
+ * @param attraction The attraction the visitor is
  *
  * @throws VisitorTooShortException If the visitor is too short for the attraction.
  */
@@ -41,6 +40,7 @@ void Visitor::visitAttraction(const std::shared_ptr<Attraction>& attraction) con
     if (height < attraction->getMinHeight()) {
         throw VisitorTooShortException();
     }
+    timeSpent += attraction->getDuration();
     std::cout << name << " is visiting " << attraction->getName() << "!\n";
     attraction->simulateExperience();
 }
@@ -87,7 +87,11 @@ double Visitor::getTimeSpent() const {
  * This method is used to track the number of visitors in the park.
  */
 void Visitor::visitPark() {
-    Park::incrementTotalVisitors();
+    static bool visited = false;
+    if(!visited) {
+        Park::incrementTotalVisitors();
+        visited = true;
+    }
 }
 
 /**

@@ -7,7 +7,7 @@
 #include "RollerCoaster.h"
 #include "FerrisWheel.h"
 
-// Static member initialization
+
 int Park::totalVisitors = 0;
 
 /**

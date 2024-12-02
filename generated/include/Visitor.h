@@ -17,7 +17,7 @@ class Visitor {
     int age; /**< The age of the visitor. */
     int height; /**< The height of the visitor in cm. */
     std::shared_ptr<Ticket> ticket; /**< The ticket of the visitor. */
-    double timeSpent; /**< The time spent by the visitor on attractions. */
+    mutable double timeSpent; /**< The time spent by the visitor on attractions. */
 
 public:
     /**

@@ -6,9 +6,8 @@
 /**
  * @brief Class representing a carousel attraction.
  *
- * This class derives from the Attraction base class and represents a carousel
- * ride in the amusement park. It includes functionality specific to the carousel,
- * such as simulating the ride experience and spinning around.
+ * This class derives from the Attraction base class and represents a carousel ride in the amusement park.
+ * It includes functionality specific to the carousel, such as simulating the ride experience and spinning around.
  */
 class Carousel : public Attraction {
     int maxCapacity; ///< The maximum number of people the carousel can accommodate at once.

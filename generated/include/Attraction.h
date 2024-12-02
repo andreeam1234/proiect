@@ -60,7 +60,7 @@ public:
     /**
      * @brief Simulates the attraction experience.
      */
-    virtual void simulateExperience() const;
+    virtual void simulateExperience() const = 0;
 
     /**
      * @brief Increments the current visitor count by one.
@@ -89,7 +89,7 @@ public:
      * @brief Overloads the output stream operator for Attraction.
      * @param os Reference to the output stream.
      * @param attraction Reference to the Attraction object.
-     * @return Reference to the output stream.
+     *
      */
     friend std::ostream& operator<<(std::ostream& os, const Attraction& attraction);
 };
