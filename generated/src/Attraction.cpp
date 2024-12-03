@@ -84,7 +84,7 @@ int Attraction::getCurrentVisitors() const { return currentVisitors; }
  * Outputs the name and duration of the attraction.
  */
 void Attraction::describe() const {
-    std::cout << "Attraction: " << name << ", Duration: " << duration << "h\n";
+    std::cout << "Attraction: " << name << ", Duration: " << duration << "min\n";
 }
 
 /**

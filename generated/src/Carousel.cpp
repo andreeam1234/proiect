@@ -42,5 +42,5 @@ std::unique_ptr<Attraction> Carousel::clone() const {
  * Prints a message indicating the carousel is spinning and children are enjoying the ride.
  */
 void Carousel::spinAround() const {
-    std::cout << "The Carousel " << getName() << " is spinning and kids are having fun!\n";
+    std::cout << "The " << getName() << " is spinning and kids are having fun!\n";
 }

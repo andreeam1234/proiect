@@ -83,7 +83,7 @@ public:
      * @brief Describes the attraction.
      * @details Outputs information about the attraction to the console.
      */
-    virtual void describe() const;
+    void describe() const;
 
     /**
      * @brief Overloads the output stream operator for Attraction.

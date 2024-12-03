@@ -10,7 +10,7 @@
  * @brief Represents a visitor to the amusement park.
  *
  * This class models a visitor with information such as their name, age, height, and ticket.
- * The visitor can visit attractions, track the time spent, and print ticket information.
+ * The visitor can visit attractions, track the time spent.
  */
 class Visitor {
     std::string name; /**< The name of the visitor. */

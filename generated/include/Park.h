@@ -10,8 +10,8 @@
 /**
  * @brief Represents a theme park that contains attractions and visitors.
  *
- * This class manages the park's attractions, visitors, and calculates various metrics such as total profit
- * and average time spent in the park.
+ * This class manages the park's attractions, visitors, and calculates the total profit
+ * and average time spent at the attractions .
  */
 class Park {
 private:
