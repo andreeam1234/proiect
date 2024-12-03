@@ -18,7 +18,7 @@ private:
     std::string name; /**< The name of the park. */
     std::vector<std::shared_ptr<Attraction>> attractions; /**< The list of attractions in the park. */
     std::vector<std::shared_ptr<Visitor>> visitors; /**< The list of visitors in the park. */
-    static int totalVisitors; /**< The total number of visitors across all parks. */
+    static int totalVisitors; /**< The total number of visitors. */
 
 public:
     /**
