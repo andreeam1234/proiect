@@ -64,7 +64,6 @@ public:
 
     /**
      * @brief Increments the current visitor count by one.
-     * @throws std::runtime_error if the maximum visitor limit is exceeded.
      */
     void addVisitor();
 
@@ -83,7 +82,7 @@ public:
      * @brief Describes the attraction.
      * @details Outputs information about the attraction to the console.
      */
-    void describe() const;
+    virtual void describe() const;
 
     /**
      * @brief Overloads the output stream operator for Attraction.

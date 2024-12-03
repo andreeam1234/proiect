@@ -21,7 +21,7 @@
 /**
  * @brief Initializes the park and its attractions, and simulates visitor experiences.
  *
- * Creates the park, adds various attractions to it, and generates visitors with tickets.
+ * Creates the park, adds attractions to it and generates visitors with tickets.
  * Visitors then visit the park and attractions, and the program calculates the park's profit.
  */
 int main() {
