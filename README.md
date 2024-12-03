@@ -1,28 +1,35 @@
+
+# FunLand
+
+### Project Description
+This project represents a simulation of an amusement park, which includes attractions, such as Ferris Wheel, Carousel and Roller Coaster, visitors and tickets.
+The project provides functionalities that allow adding attractions, visitors and managing them.
+Exceptions are implemented for attractions that have exceeded the number of visitors, invalid tickets, visitors that are too short to ride certain attractions.
+
 This project represents a simulation of an amusement park, which includes attractions, such as Ferris Wheel, Carousel and Roller Coaster, visitors and tickets.
 The project provides functionalities that allow adding attractions, visitors and managing them.
 Exceptions are implemented for attractions that have exceeded the number of visitors, invalid tickets, visitors that are too short to ride certain attractions.
 
 The project is structured in several classes:
-1. Attraction Class with derived classes:
-a) Ferris Wheel
-b) Carousel
-c) Roller Coaster
-2. Visitor
-3. Ticket
-4. Park
+1. Park
+  - [ ] Represents the amusement park. It contains a list of attractions and visitors.
+  - [ ] It allows for adding attractions and visitors, displaying them, and managing the profit generated from ticket sales.
 
 
+2. Attraction
+- [ ] The base class for all attractions in the park.
+- [ ] It contains common information like the attraction's name, price, and capacity, but also methods that are specific to individual attractions.
+
+3. Visitor
+  - [ ] Represents a park visitor, containing information like their name, age, height, and tickets. Visitors can visit attractions but may encounter exceptions like height restrictions or invalid tickets.
+
+4. Ticket
+  - [ ] Represents a ticket issued to a visitor. Tickets can be valid or invalid, and their price is added to the park's profit.
+
+5. RollerCoaster, FerrisWheel, Carousel: Classes derived from Attraction.
+  - [ ] Each attraction has specific methods to simulate the experience provided to visitors (e.g., screamTest for roller coasters, spinAround for carousels, etc.).
 
 
-
-# Nu primesc notă pentru că nu am pus titlu și descriere
-
-### Important!
-Aveți voie cu cod generat de modele de limbaj la care nu ați contribuit semnificativ doar în folder-ul `generated`.
-Codul generat pus "ca să fie"/pe care nu îl înțelegeți se punctează doar pentru puncte bonus, doar în contextul
-în care oferă funcționalități ajutătoare și doar dacă are sens.
-
-O cerință nu se consideră îndeplinită dacă este realizată doar ca o serie de apeluri proxy către cod generat.
 
 ### Cerințe modele de limbaj la nivel de semestru
 - [ ] minim o funcționalitate majoritar doar cu LLM
