@@ -17,7 +17,7 @@ public:
      *
      * @return A C-string with the error message.
      */
-    [[nodiscard]] const char* what() const noexcept override {
+    [[nodiscard]] const char *what() const noexcept override {
         return "The visitor is too short for this attraction!";
     }
 };

@@ -27,7 +27,7 @@ public:
      * @param numberCabins The number of cabins on the Ferris Wheel.
      * @param maxVisitors The maximum number of visitors allowed at the Ferris Wheel.
      */
-    FerrisWheel(const std::string& name, double duration, int minHeight, int numberCabins, int maxVisitors);
+    FerrisWheel(const std::string &name, double duration, int minHeight, int numberCabins, int maxVisitors);
 
     /**
      * @brief Simulate the experience of the Ferris Wheel.

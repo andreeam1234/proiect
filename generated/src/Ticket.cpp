@@ -2,8 +2,9 @@
 #include "TicketInvalidException.h"
 #include <iostream>
 
-Ticket::Ticket(double price, const std::string& type, bool isValid)
-    : type(type), price(price), isValid(isValid) {}
+Ticket::Ticket(double price, const std::string &type, bool isValid)
+    : type(type), price(price), isValid(isValid) {
+}
 
 std::string Ticket::getType() const {
     return type;
@@ -22,4 +23,3 @@ void Ticket::validate() const {
         throw TicketInvalidException();
     }
 }
-

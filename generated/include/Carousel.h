@@ -24,7 +24,7 @@ public:
      * @param maxCapacity The maximum number of people allowed on the carousel at once.
      * @param maxVisitors The maximum number of visitors allowed at the carousel.
      */
-    explicit Carousel(const std::string& name, double duration, int minHeight, int maxCapacity, int maxVisitors);
+    explicit Carousel(const std::string &name, double duration, int minHeight, int maxCapacity, int maxVisitors);
 
     /**
      * @brief Simulate the experience of the carousel.

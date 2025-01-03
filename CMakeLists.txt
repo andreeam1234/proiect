@@ -67,6 +67,12 @@ add_executable(${PROJECT_NAME}
         generated/src/Park.cpp
         generated/include/VisitorTooShortException.h
         generated/include/TicketInvalidException.h
+        generated/include/Observer.h
+        generated/include/Subject.h
+        generated/include/Ticket_factory.h
+        generated/include/Visitor_list.h
+        generated/src/ChildVisitor.cpp
+        generated/src/AdultVisitor.cpp
 )
 
 include(cmake/CompilerFlags.cmake)

@@ -2,8 +2,9 @@
 #include "MaxVisitorsExceededException.h"
 #include <iostream>
 
-Attraction::Attraction(const std::string& name, double duration, int minHeight, int maxVisitors)
-    : name(name), duration(duration), minHeight(minHeight), maxVisitors(maxVisitors), currentVisitors(0) {}
+Attraction::Attraction(const std::string &name, double duration, int minHeight, int maxVisitors)
+    : name(name), duration(duration), minHeight(minHeight), maxVisitors(maxVisitors), currentVisitors(0) {
+}
 
 void Attraction::simulateExperience() const {
     if (currentVisitors >= maxVisitors) {
@@ -34,11 +35,11 @@ void Attraction::describe() const {
     std::cout << "Attraction: " << name << ", Duration: " << duration << "min\n";
 }
 
-std::ostream& operator<<(std::ostream& os, const Attraction& attraction) {
+std::ostream &operator<<(std::ostream &os, const Attraction &attraction) {
     os << "Attraction Name: " << attraction.name << "\n"
-       << "Duration: " << attraction.duration << " minutes\n"
-       << "Minimum Height: " << attraction.minHeight << " cm\n"
-       << "Max Visitors: " << attraction.maxVisitors << "\n"
-       << "Current Visitors: " << attraction.currentVisitors << "\n";
+            << "Duration: " << attraction.duration << " minutes\n"
+            << "Minimum Height: " << attraction.minHeight << " cm\n"
+            << "Max Visitors: " << attraction.maxVisitors << "\n"
+            << "Current Visitors: " << attraction.currentVisitors << "\n";
     return os;
 }

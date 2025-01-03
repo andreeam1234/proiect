@@ -15,7 +15,7 @@ public:
      *
      * @return A C-string with the error message indicating the ticket is invalid.
      */
-    [[nodiscard]] const char* what() const noexcept override {
+    [[nodiscard]] const char *what() const noexcept override {
         return "The ticket is invalid!";
     }
 };

@@ -2,6 +2,7 @@
 #define PARK_H
 
 #include <string>
+#include "Subject.h"
 #include <vector>
 #include <memory>
 #include "Visitor.h"
@@ -13,11 +14,12 @@
  * This class manages the park's attractions, visitors, and calculates the total profit
  * and average time spent at the attractions .
  */
-class Park {
+class Park : public Subject {
 private:
     std::string name; /**< The name of the park. */
-    std::vector<std::shared_ptr<Attraction>> attractions; /**< The list of attractions in the park. */
-    std::vector<std::shared_ptr<Visitor>> visitors; /**< The list of visitors in the park. */
+    std::vector<std::shared_ptr<Attraction> > attractions; /**< The list of attractions in the park. */
+    std::vector<std::shared_ptr<Visitor> > visitors; /**< The list of visitors in the park. */
+    std::vector<std::shared_ptr<Observer> > observers; /**< List of observers (e.g., visitors). */
     static int totalVisitors; /**< The total number of visitors. */
 
 public:
@@ -28,7 +30,7 @@ public:
      *
      * @param name The name of the park.
      */
-    explicit Park(const std::string& name);
+    explicit Park(const std::string &name);
 
     /**
      * @brief Copy constructor for the Park class.
@@ -37,7 +39,7 @@ public:
      *
      * @param other The park object to copy.
      */
-    Park(const Park& other);
+    Park(const Park &other);
 
     /**
      * @brief Assignment operator for the Park class.
@@ -47,7 +49,7 @@ public:
      * @param other The park object to assign.
      * @return A reference to the updated park object.
      */
-    Park& operator=(Park other);
+    Park &operator=(Park other);
 
     /**
      * @brief Swaps the contents of two Park objects.
@@ -57,7 +59,7 @@ public:
      * @param a The first park object.
      * @param b The second park object.
      */
-    friend void swap(Park& a, Park& b) noexcept;
+    friend void swap(Park &a, Park &b) noexcept;
 
     /**
      * @brief Adds an attraction to the park.
@@ -66,7 +68,7 @@ public:
      *
      * @param attraction The attraction to add.
      */
-    void addAttraction(const std::shared_ptr<Attraction>& attraction);
+    void addAttraction(const std::shared_ptr<Attraction> &attraction);
 
     /**
      * @brief Adds a visitor to the park.
@@ -75,13 +77,42 @@ public:
      *
      * @param visitor The visitor to add.
      */
-    void addVisitor(const std::shared_ptr<Visitor>& visitor);
+    void addVisitor(const std::shared_ptr<Visitor> &visitor);
 
     /**
-     * @brief Displays the list of attractions in the park.
-     *
-     * This function prints out the details of all attractions in the park.
-     */
+         * @brief Adds an observer to the list.
+         *
+         * This function adds an observer (such as a visitor) to the park's observer list.
+         *
+         * @param observer The observer to add.
+         */
+    void addObserver(const std::shared_ptr<Observer> &observer) override;
+
+    /**
+        * @brief Removes an observer from the list.
+        *
+        * This function removes an observer from the park's observer list.
+        *
+        * @param observer The observer to remove.
+        */
+
+    void removeObserver(const std::shared_ptr<Observer> &observer) override;
+
+    /**
+         * @brief Notifies all observers about an event.
+         *
+         * This function notifies all observers about a specific event.
+         *
+         * @param eventMessage The event message to send to the observers.
+         */
+
+    void notifyObservers(const std::string &eventMessage) override;
+
+    /**
+        * @brief Displays the list of attractions in the park.
+        *
+        * This function prints out the details of all attractions in the park.
+        */
     void showAttractions() const;
 
     /**
@@ -89,7 +120,7 @@ public:
      *
      * @return A constant reference to the vector of attractions.
      */
-    [[nodiscard]] const std::vector<std::shared_ptr<Attraction>>& getAttractions() const;
+    [[nodiscard]] const std::vector<std::shared_ptr<Attraction> > &getAttractions() const;
 
     /**
      * @brief Displays the list of visitors in the park.

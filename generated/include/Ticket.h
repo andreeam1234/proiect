@@ -24,7 +24,7 @@ public:
      * @param type The type of the ticket.
      * @param isValid The validity status of the ticket.
      */
-    Ticket(double price, const std::string& type, bool isValid);
+    Ticket(double price, const std::string &type, bool isValid);
 
     /**
      * @brief Retrieves the type of the ticket.

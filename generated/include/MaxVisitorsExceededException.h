@@ -19,7 +19,7 @@ public:
      *
      * @return A constant character pointer to the error message.
      */
-    [[nodiscard]] const char* what() const noexcept override {
+    [[nodiscard]] const char *what() const noexcept override {
         return "The maximum number of visitors for this attraction has been exceeded!";
     }
 };

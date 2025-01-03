@@ -2,9 +2,15 @@
 #include "Park.h"
 #include <iostream>
 #include "VisitorTooShortException.h"
+#include <algorithm>
 
 Visitor::Visitor(std::string name, int age, int height, std::shared_ptr<Ticket> ticket)
-    : name(std::move(name)), age(age), height(height), ticket(std::move(ticket)), timeSpent(0) {}
+    : name(std::move(name)), age(age), height(height), ticket(std::move(ticket)), timeSpent(0) {
+}
+
+void Visitor::update(const std::string &eventMessage) {
+    std::cout << "Visitor " << name << " received update: " << eventMessage << std::endl;
+}
 
 void Visitor::printTicketInfo() const {
     std::cout << name << "'s Ticket:\n";
@@ -12,7 +18,7 @@ void Visitor::printTicketInfo() const {
     std::cout << "Price: $" << ticket->getPrice() << "\n";
 }
 
-void Visitor::visitAttraction(const std::shared_ptr<Attraction>& attraction) const {
+void Visitor::visitAttraction(const std::shared_ptr<Attraction> &attraction) const {
     if (height < attraction->getMinHeight()) {
         throw VisitorTooShortException();
     }
@@ -39,7 +45,7 @@ double Visitor::getTimeSpent() const {
 
 void Visitor::visitPark() {
     static bool visited = false;
-    if(!visited) {
+    if (!visited) {
         Park::incrementTotalVisitors();
         visited = true;
     }
@@ -48,3 +54,8 @@ void Visitor::visitPark() {
 std::shared_ptr<Ticket> Visitor::getTicket() const {
     return ticket;
 }
+
+std::string Visitor::getType() const {
+    return "Generic Visitor";
+}
+

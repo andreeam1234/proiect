@@ -26,7 +26,7 @@ public:
      * @param speed The speed of the roller coaster in km/h.
      * @param maxVisitors The maximum number of visitors allowed on the ride.
      */
-    explicit RollerCoaster(const std::string& name, double duration, int minHeight, int speed, int maxVisitors);
+    explicit RollerCoaster(const std::string &name, double duration, int minHeight, int speed, int maxVisitors);
 
     /**
      * @brief Performs a scream test for the roller coaster.
