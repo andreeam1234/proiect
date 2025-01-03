@@ -6,9 +6,9 @@ ChildVisitor::ChildVisitor(std::string name, int age, int height, std::shared_pt
 }
 
 void ChildVisitor::visitAttraction(const std::shared_ptr<Attraction> &attraction) const {
-    // Logic specific to children visiting attractions
-    std::cout << name << " (Child) is enjoying a child-friendly attraction!" << std::endl;
+    std::cout << "Visiting attraction: " << attraction->getName() << std::endl;
 }
+
 
 std::string ChildVisitor::getType() const {
     return "Child";
