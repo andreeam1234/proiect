@@ -1,10 +1,4 @@
-/**
- * @file main.cpp
- * @brief Main entry point for the amusement park simulation.
- *
- * This file sets up an amusement park, adds attractions, visitors, and calculates profit.
- * It also handles exceptions such as invalid tickets, visitor height restrictions, and max visitors exceeded.
- */
+
 
 #include <memory>
 #include "Park.h"
