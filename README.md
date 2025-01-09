@@ -29,6 +29,13 @@ The project is structured in several classes:
 5. RollerCoaster, FerrisWheel, Carousel: Classes derived from Attraction.
   - [ ] Each attraction has specific methods to simulate the experience provided to visitors (e.g., screamTest for roller coasters, spinAround for carousels, etc.).
 
+Template class VisitorList is used to manage a list of visitors to an amusement park. The class is designed to handle visitors of different
+types, such as AdultVisitor and ChildVisitor.
+
+Observer Pattern is implemented to manage the interaction between the amusement park and its visitors.
+This pattern allows the park to notify its visitors whenever important events occur, such as the addition of new attractions or the park closing.
+
+he TicketFactory interface defines the contract for creating tickets, while concrete factories like StandardTicketFactory and VIPTicketFactory.
 
 
 ### Cerințe modele de limbaj la nivel de semestru
