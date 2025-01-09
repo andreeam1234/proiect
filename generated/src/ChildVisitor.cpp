@@ -9,7 +9,6 @@ void ChildVisitor::visitAttraction(const std::shared_ptr<Attraction> &attraction
     std::cout << "Visiting attraction: " << attraction->getName() << std::endl;
 }
 
-
 std::string ChildVisitor::getType() const {
     return "Child";
 }

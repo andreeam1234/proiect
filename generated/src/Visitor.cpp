@@ -58,4 +58,3 @@ std::shared_ptr<Ticket> Visitor::getTicket() const {
 std::string Visitor::getType() const {
     return "Generic Visitor";
 }
-
