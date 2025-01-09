@@ -2,7 +2,6 @@
 #define VISITORTOOSHORTEXCEPTION_H
 
 #include <exception>
-#include <string>
 
 /**
  * @brief Exception thrown when a visitor is too short for an attraction.

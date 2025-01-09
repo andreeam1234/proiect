@@ -109,11 +109,11 @@ public:
         std::sort(visitors.begin(), visitors.end(), compare);
     }
 
- /**
-      * @brief Display the visitor's information.
-      */
- virtual void displayVisitor() const {
-     std::cout << "Name: " << name << ", Age: " << age << ", Height: " << height << std::endl;
+    /**
+         * @brief Display the visitor's information.
+         */
+    virtual void displayVisitor() const {
+        std::cout << "Name: " << name << ", Age: " << age << ", Height: " << height << std::endl;
     }
 
     /**

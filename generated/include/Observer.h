@@ -4,8 +4,9 @@
 #include <string>
 
 class Observer {
-    public:
-    virtual void update(const std::string& eventMessage) = 0;
+public:
+    virtual void update(const std::string &eventMessage) = 0;
+
     virtual ~Observer() = default;
 };
 #endif //OBSERVER_H

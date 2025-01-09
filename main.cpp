@@ -1,5 +1,3 @@
-
-
 #include <memory>
 #include "Park.h"
 #include "FerrisWheel.h"
