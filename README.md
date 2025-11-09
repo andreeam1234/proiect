@@ -189,6 +189,18 @@ cmake --install build --config Debug --prefix install_dir
 
 Vezi și [`scripts/cmake.sh`](scripts/cmake.sh).
 
+| Component | Qty | Notes |
+|---|---:|---|
+| Arduino UNO | 1 | main controller |
+| 74HC595 shift register | 1 | drives segments via SPI |
+| 4-digit 7-segment display | 1 | common **cathode** |
+| Joystick module (X/Y/SW) | 1 | analog X/Y + digital SW |
+| Push button | 1 | pause/menu |
+| Active buzzer | 1 | sound |
+| Resistors ~220 Ω | 7–8 | per segment (current-limiting) |
+| Breadboard + jumpers | – | wiring |
+
+
 ## Resurse
 
 - [SFML](https://github.com/SFML/SFML/tree/2.6.1) (Zlib)
